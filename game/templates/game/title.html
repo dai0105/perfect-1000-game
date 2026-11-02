@@ -1,0 +1,419 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ぴったり1000円。</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'game/css/style.css' %}"
+    >
+</head>
+<body>
+
+<main>
+
+    <!-- =========================
+         タイトル画面
+    ========================== -->
+    <section id="title-screen">
+
+        <header>
+
+            <p>
+                PERFECT ¥1,000
+            </p>
+
+            <h1>
+                ぴったり1000円。
+            </h1>
+
+            <p>
+                その買い物、
+                <br>
+                1,000円にできますか？
+            </p>
+
+        </header>
+
+
+        <!-- BEST SCORE -->
+        <section>
+
+            <p>
+                BEST ERROR
+            </p>
+
+            <div id="best-error">
+                🏆 ---
+            </div>
+
+        </section>
+
+
+        <!-- ルール -->
+        <section>
+
+            <h2>
+                🧮 ルールは簡単
+            </h2>
+
+            <p>
+                表示された商品の中から
+                商品を選んでください。
+            </p>
+
+            <p>
+                目標は、
+                <strong>合計1,000円。</strong>
+            </p>
+
+            <p>
+                1,000円との差が
+                小さいほど高評価です。
+            </p>
+
+            <p>
+                全5問。
+                <br>
+                PERFECTを狙おう。
+            </p>
+
+            <div class="rank-guide">
+
+                <p class="rank-guide-title">
+                    RANK GUIDE
+                </p>
+
+                <div class="rank-guide-row rank-guide-s-plus">
+                    <span>S+</span>
+                    <strong>0〜75円</strong>
+                </div>
+
+                <div class="rank-guide-row rank-guide-s">
+                    <span>S</span>
+                    <strong>76〜150円</strong>
+                </div>
+
+                <div class="rank-guide-row rank-guide-a">
+                    <span>A</span>
+                    <strong>151〜250円</strong>
+                </div>
+
+                <div class="rank-guide-row rank-guide-b">
+                    <span>B</span>
+                    <strong>251〜400円</strong>
+                </div>
+
+                <div class="rank-guide-row rank-guide-c">
+                    <span>C</span>
+                    <strong>401〜600円</strong>
+                </div>
+
+                <div class="rank-guide-row rank-guide-d">
+                    <span>D</span>
+                    <strong>601円〜</strong>
+                </div>
+
+                <p class="rank-guide-note">
+                    ※ 全5ROUNDのTOTAL ERRORで判定
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ゲーム開始 -->
+        <button
+            type="button"
+            id="game-start-button"
+        >
+            🎮 GAME START
+        </button>
+
+    </section>
+
+<!-- =========================
+     ゲーム画面
+========================== -->
+<section
+    id="game-screen"
+    hidden
+>
+
+    <header>
+
+        <p id="round-number">
+            ROUND 1 / 5
+        </p>
+
+        <h1>
+            ぴったり1000円。
+        </h1>
+
+    </header>
+
+
+    <!-- TARGET -->
+    <section>
+
+        <p>
+            TARGET
+        </p>
+
+        <div>
+            1,000円
+        </div>
+
+    </section>
+
+
+    <!-- TIMER -->
+    <section>
+
+        <p>
+            TIME
+        </p>
+
+        <div id="time-left">
+            10.0
+        </div>
+
+        <div
+            id="timer-bar"
+            aria-hidden="true"
+        >
+            <div id="timer-bar-fill">
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- 商品 -->
+    <section>
+
+        <h2>
+            商品を選んでください
+        </h2>
+
+        <div id="product-list">
+        </div>
+
+    </section>
+
+    <!-- 操作 -->
+    <section>
+
+        <button
+            type="button"
+            id="undo-button"
+            disabled
+        >
+            ↩ 1つ戻す
+        </button>
+
+        <button
+            type="button"
+            id="submit-button"
+            disabled
+        >
+            ✅ これで決定！
+        </button>
+
+    </section>
+
+</section>
+
+<!-- =========================
+     ROUND結果画面
+========================== -->
+<section
+    id="round-result-screen"
+    hidden
+>
+
+    <p>
+        ROUND RESULT
+    </p>
+
+    <h2 id="result-rating">
+        PERFECT！
+    </h2>
+
+    <section>
+
+        <p>
+            あなたの合計
+        </p>
+
+        <div id="result-total">
+            1,000円
+        </div>
+
+    </section>
+
+    <section>
+
+        <p>
+            TARGET
+        </p>
+
+        <div>
+            1,000円
+        </div>
+
+    </section>
+
+    <section>
+
+        <p>
+            誤差
+        </p>
+
+        <div id="result-error">
+            0円
+        </div>
+
+    </section>
+
+    <button
+        type="button"
+        id="next-round-button"
+    >
+        NEXT ROUND →
+    </button>
+
+</section>
+
+<!-- =========================
+     最終結果画面
+========================== -->
+<section
+    id="game-complete-screen"
+    hidden
+>
+
+    <p>
+        FINAL RESULT
+    </p>
+
+    <h2>
+        全5問終了！
+    </h2>
+
+
+    <!-- 各ROUNDの結果 -->
+    <section>
+
+        <h3>
+            ROUND RESULTS
+        </h3>
+
+        <div id="final-round-results">
+        </div>
+
+    </section>
+
+
+    <!-- TOTAL ERROR -->
+    <section>
+
+        <p>
+            TOTAL ERROR
+        </p>
+
+        <div id="final-total-error">
+            0円
+        </div>
+
+    </section>
+
+
+    <!-- PERFECT回数 -->
+    <section>
+
+        <p>
+            PERFECT
+        </p>
+
+        <div id="final-perfect-count">
+            0 / 5
+        </div>
+
+    </section>
+
+
+    <!-- ランク -->
+    <section>
+
+        <p>
+            RANK
+        </p>
+
+        <div id="final-rank">
+            A
+        </div>
+
+        <p id="final-rank-message">
+        </p>
+
+    </section>
+
+
+    <!-- BEST ERROR -->
+    <section>
+
+        <p>
+            BEST ERROR
+        </p>
+
+        <div id="final-best-error">
+            ---
+        </div>
+
+        <p
+            id="new-record-message"
+            hidden
+        >
+            🎉 NEW RECORD！
+        </p>
+
+    </section>
+
+
+    <!-- 操作 -->
+    <button
+        type="button"
+        id="retry-button"
+    >
+        🎮 もう一度
+    </button>
+
+    <button
+        type="button"
+        id="back-title-button"
+    >
+        タイトルへ戻る
+    </button>
+
+</section>
+
+</main>
+
+<script
+    src="{% static 'game/js/game.js' %}"
+></script>
+
+</body>
+
+</html>
