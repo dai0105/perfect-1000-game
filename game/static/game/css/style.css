@@ -1300,6 +1300,59 @@ section > h3 {
         rgba(224, 32, 65, 0.45);
 }
 
+/* =========================
+   5分ゲーム ポータルリンク
+========================= */
+
+.portal-link-section {
+    margin-top: 28px;
+    padding-top: 24px;
+
+    border-top: 1px solid #e5e7eb;
+
+    text-align: center;
+}
+
+.portal-link-section p {
+    margin: 0 0 12px;
+
+    color: #6b7280;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.portal-link {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    color: #2563eb;
+    background-color: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.portal-link:hover {
+    color: #ffffff;
+    background-color: #2563eb;
+    border-color: #2563eb;
+
+    transform: translateY(-2px);
+}
+
 
 @keyframes timer-pulse {
 
@@ -1396,6 +1449,24 @@ section > h3 {
     #undo-button,
     #game-screen #submit-button {
         width: 100%;
+    }
+
+    .portal-link-section {
+        margin-top: 24px;
+        padding-top: 20px;
+    }
+
+    .portal-link-section p {
+        font-size: 12px;
+    }
+
+    .portal-link {
+        width: 100%;
+        max-width: 300px;
+
+        padding: 12px 16px;
+
+        font-size: 13px;
     }
 
 }
